@@ -4,7 +4,7 @@ from homeassistant.core import callback
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
 import voluptuous as vol
 
-from powerpal import Powerpal
+from mindmelting.powerpal import Powerpal
 
 from .const import (
     CONF_DEVICE_ID,

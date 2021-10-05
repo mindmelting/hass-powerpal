@@ -9,5 +9,5 @@
   "codeowners": [
     "@mindmelting"
   ],
-  "requirements": ["powerpal==0.2.0"]
+  "requirements": ["mindmelting.powerpal==0.3.0"]
 }

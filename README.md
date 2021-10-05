@@ -7,13 +7,31 @@
 
 _Component to integrate with [powerpal][powerpal]._
 
-**This component will set up the following platforms.**
+_This repository and integration is not affiliated with Powerpal._
+
+**This component will set up the following platforms and entities.**
 
 Platform | Description
 -- | --
-`sensor` | Show info from powerpal API.
+`sensor` | Show info from Powerpal Readings API.
 
-![example][exampleimg]
+Entity | Description
+-- | --
+`sensor.powerpal_live_consumption` | Current reading from Powerpal Readings API (updated every minute).
+`sensor.powerpal_total_consumption` | Total consumption recorded by Powerpal - entity can be used in Energy Dashboard.
+
+![sensor][sensorimg]
+
+![energy][energyimg]
+
+## Automatic Installation
+
+1. Install HACS
+2. Within HA go to HACS > Integrations > ... (in top right corner) > Custom Repositories
+3. Add URL: `https://github.com/mindmelting/hass-powerpal`, Category: `Integration`
+4. Go to the integrations page inside your home assistant install
+5. Search for `Powerpal`
+6. Install, enter your Powerpal API Authorization Key and Powerpal Device ID.
 
 ## Manual Installation
 
@@ -23,7 +41,7 @@ Platform | Description
 4. Download _all_ the files from the `custom_components/powerpal/` directory (folder) in this repository.
 5. Place the files you downloaded in the new directory (folder) you created.
 6. Restart Home Assistant
-7. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "Powerpal"
+7. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for `Powerpal`
 
 Using your HA configuration directory (folder) as a starting point you should now also have this:
 
@@ -40,7 +58,7 @@ custom_components/powerpal/sensor.py
 
 <!---->
 
-## Contributions are welcome!
+## Contributions are welcome
 
 If you want to contribute to this please read the [Contribution guidelines](CONTRIBUTING.md)
 
@@ -53,4 +71,5 @@ If you want to contribute to this please read the [Contribution guidelines](CONT
 [hacsbadge]: https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge
 [releases-shield]: https://img.shields.io/github/release/mindmelting/hass-powerpal.svg?style=for-the-badge
 [releases]: https://github.com/mindmelting/hass-powerpal/releases
-[exampleimg]: example.png
+[sensorimg]: sensor.png
+[energyimg]: energy.png

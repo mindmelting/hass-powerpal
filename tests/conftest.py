@@ -45,9 +45,7 @@ def skip_notifications_fixture():
 @pytest.fixture(name="bypass_get_data")
 def bypass_get_data_fixture():
     """Skip calls to get data from API."""
-    with patch(
-        "powerpal.Powerpal.get_data"
-    ):
+    with patch("mindmelting.powerpal.Powerpal.get_data"):
         yield
 
 
@@ -57,7 +55,7 @@ def bypass_get_data_fixture():
 def error_get_data_fixture():
     """Simulate error when retrieving data from API."""
     with patch(
-        "powerpal.Powerpal.get_data",
+        "mindmelting.powerpal.Powerpal.get_data",
         side_effect=Exception,
     ):
         yield
