@@ -1,2 +1,2 @@
 homeassistant
-powerpal==0.2.0
+mindmelting.powerpal==0.3.0

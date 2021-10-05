@@ -6,13 +6,22 @@
 
 _Component to integrate with [powerpal][powerpal]._
 
+_This repository and integration is not affiliated with Powerpal._
+
 **This component will set up the following platforms.**
 
 Platform | Description
 -- | --
-`sensor` | Show info from Powerpal API.
+`sensor` | Show info from Powerpal Readings API.
 
-![example][exampleimg]
+Entity | Description
+-- | --
+`sensor.powerpal_live_consumption` | Current reading from Powerpal Readings API (updated every minute).
+`sensor.powerpal_total_consumption` | Total consumption recorded by Powerpal - entity can be used in Energy Dashboard.
+
+![sensor][sensorimg]
+
+![energy][energyimg]
 
 {% if not installed %}
 
@@ -22,7 +31,6 @@ Platform | Description
 1. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "Powerpal".
 
 {% endif %}
-
 
 ## Configuration is done in the UI
 
@@ -37,4 +45,5 @@ Platform | Description
 [hacsbadge]: https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge
 [releases-shield]: https://img.shields.io/github/release/mindmelting/hass-powerpal.svg?style=for-the-badge
 [releases]: https://github.com/mindmelting/hass-powerpal/releases
-[exampleimg]: example.png
+[sensorimg]: sensor.png
+[energyimg]: energy.png
