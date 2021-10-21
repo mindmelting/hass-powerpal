@@ -20,6 +20,10 @@ Entity | Description
 `sensor.powerpal_live_consumption` | Current reading from Powerpal Readings API (updated every minute).
 `sensor.powerpal_total_consumption` | Total consumption recorded by Powerpal - entity can be used in Energy Dashboard.
 
+⚠️ Please note ⚠️
+
+For the entities to display up-to-date information - it requires your Powerpal app (which can be running in the background) to be connected to the Powerpal device continuously for it to report near realtime usage information. The current implementation does not retrospectively use historical data - this may come in a future release.
+
 ![sensor][sensorimg]
 
 ![energy][energyimg]
