@@ -2,7 +2,6 @@
     "config": {
         "step": {
             "user": {
-                "title": "Powerpal",
                 "description": "If you need help with the configuration have a look here: https://github.com/mindmelting/hass-powerpal",
                 "data": {
                     "auth_key": "Authorization Key",
