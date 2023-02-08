@@ -5,7 +5,7 @@ from homeassistant.components.sensor import (
     STATE_CLASS_MEASUREMENT,
 )
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from homeassistant.const import ENERGY_KILO_WATT_HOUR, DEVICE_CLASS_ENERGY
+from homeassistant.const import ENERGY_WATT_HOUR, POWER_WATT, DEVICE_CLASS_ENERGY, DEVICE_CLASS_POWER
 
 from .const import NAME, DOMAIN, ICON, CONF_DEVICE_ID, ATTRIBUTION
 
@@ -26,16 +26,6 @@ class PowerpalSensor(CoordinatorEntity):
     def __init__(self, coordinator, config_entry):
         super().__init__(coordinator)
         self.config_entry = config_entry
-
-    @property
-    def native_unit_of_measurement(self) -> str:
-        """Return the native unit of measurement."""
-        return ENERGY_KILO_WATT_HOUR
-
-    @property
-    def device_class(self) -> str:
-        """Return the device class."""
-        return DEVICE_CLASS_ENERGY
 
     @property
     def device_info(self):
@@ -73,14 +63,24 @@ class PowerpalTotalConsumptionSensor(PowerpalSensor, SensorEntity):
         return f"powerpal-total-{self.config_entry.entry_id}"
 
     @property
+    def device_class(self) -> str:
+        """Return the device class."""
+        return DEVICE_CLASS_ENERGY
+
+    @property
     def state_class(self) -> str:
         """Return the state class."""
         return STATE_CLASS_TOTAL_INCREASING
 
     @property
+    def native_unit_of_measurement(self) -> str:
+        """Return the native unit of measurement."""
+        return ENERGY_WATT_HOUR
+
+    @property
     def native_value(self):
         """Return the native value of the sensor."""
-        return self.coordinator.data.get("total_watt_hours") / 1000
+        return self.coordinator.data.get("total_watt_hours")
 
 
 class PowerpalLiveConsumptionSensor(PowerpalSensor, SensorEntity):
@@ -95,11 +95,21 @@ class PowerpalLiveConsumptionSensor(PowerpalSensor, SensorEntity):
         return f"powerpal-live-{self.config_entry.entry_id}"
 
     @property
+    def device_class(self) -> str:
+        """Return the device class."""
+        return DEVICE_CLASS_POWER
+
+    @property
     def state_class(self) -> str:
         """Return the state class."""
         return STATE_CLASS_MEASUREMENT
 
     @property
+    def native_unit_of_measurement(self) -> str:
+        """Return the native unit of measurement."""
+        return POWER_WATT
+
+    @property
     def native_value(self):
         """Return the native value of the sensor."""
-        return (self.coordinator.data.get("last_reading_watt_hours") * 60) / 1000
+        return (self.coordinator.data.get("last_reading_watt_hours") * 60)
