@@ -75,5 +75,5 @@ If you want to contribute to this please read the [Contribution guidelines](CONT
 [hacsbadge]: https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge
 [releases-shield]: https://img.shields.io/github/release/mindmelting/hass-powerpal.svg?style=for-the-badge
 [releases]: https://github.com/mindmelting/hass-powerpal/releases
-[sensorimg]: sensor.png
-[energyimg]: energy.png
+[sensorimg]: https://raw.githubusercontent.com/mindmelting/hass-powerpal/main/sensor.png
+[energyimg]: https://raw.githubusercontent.com/mindmelting/hass-powerpal/main/energy.png
