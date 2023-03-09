@@ -1,11 +1,15 @@
 """Sensor platform for powerpal."""
 from homeassistant.components.sensor import (
     SensorEntity,
+    SensorDeviceClass,
     STATE_CLASS_TOTAL_INCREASING,
     STATE_CLASS_MEASUREMENT,
 )
+from homeassistant.const import (
+    UnitOfPower,
+    UnitOfEnergy,
+)
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from homeassistant.const import ENERGY_WATT_HOUR, POWER_WATT, DEVICE_CLASS_ENERGY, DEVICE_CLASS_POWER
 
 from .const import NAME, DOMAIN, ICON, CONF_DEVICE_ID, ATTRIBUTION
 
@@ -65,7 +69,7 @@ class PowerpalTotalConsumptionSensor(PowerpalSensor, SensorEntity):
     @property
     def device_class(self) -> str:
         """Return the device class."""
-        return DEVICE_CLASS_ENERGY
+        return SensorDeviceClass.ENERGY
 
     @property
     def state_class(self) -> str:
@@ -75,12 +79,12 @@ class PowerpalTotalConsumptionSensor(PowerpalSensor, SensorEntity):
     @property
     def native_unit_of_measurement(self) -> str:
         """Return the native unit of measurement."""
-        return ENERGY_WATT_HOUR
+        return UnitOfEnergy.KILO_WATT_HOUR
 
     @property
     def native_value(self):
         """Return the native value of the sensor."""
-        return self.coordinator.data.get("total_watt_hours")
+        return self.coordinator.data.get("total_watt_hours") / 1000
 
 
 class PowerpalLiveConsumptionSensor(PowerpalSensor, SensorEntity):
@@ -97,7 +101,7 @@ class PowerpalLiveConsumptionSensor(PowerpalSensor, SensorEntity):
     @property
     def device_class(self) -> str:
         """Return the device class."""
-        return DEVICE_CLASS_POWER
+        return SensorDeviceClass.POWER
 
     @property
     def state_class(self) -> str:
@@ -107,9 +111,9 @@ class PowerpalLiveConsumptionSensor(PowerpalSensor, SensorEntity):
     @property
     def native_unit_of_measurement(self) -> str:
         """Return the native unit of measurement."""
-        return POWER_WATT
+        return UnitOfPower.KILO_WATT
 
     @property
     def native_value(self):
         """Return the native value of the sensor."""
-        return (self.coordinator.data.get("last_reading_watt_hours") * 60)
+        return (self.coordinator.data.get("last_reading_watt_hours") * 60) / 1000
