@@ -1,11 +1,15 @@
 """Sensor platform for powerpal."""
 from homeassistant.components.sensor import (
     SensorEntity,
+    SensorDeviceClass,
     STATE_CLASS_TOTAL_INCREASING,
     STATE_CLASS_MEASUREMENT,
 )
+from homeassistant.const import (
+    UnitOfPower,
+    UnitOfEnergy,
+)
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from homeassistant.const import ENERGY_KILO_WATT_HOUR, DEVICE_CLASS_ENERGY
 
 from .const import NAME, DOMAIN, ICON, CONF_DEVICE_ID, ATTRIBUTION
 
@@ -26,16 +30,6 @@ class PowerpalSensor(CoordinatorEntity):
     def __init__(self, coordinator, config_entry):
         super().__init__(coordinator)
         self.config_entry = config_entry
-
-    @property
-    def native_unit_of_measurement(self) -> str:
-        """Return the native unit of measurement."""
-        return ENERGY_KILO_WATT_HOUR
-
-    @property
-    def device_class(self) -> str:
-        """Return the device class."""
-        return DEVICE_CLASS_ENERGY
 
     @property
     def device_info(self):
@@ -73,9 +67,19 @@ class PowerpalTotalConsumptionSensor(PowerpalSensor, SensorEntity):
         return f"powerpal-total-{self.config_entry.entry_id}"
 
     @property
+    def device_class(self) -> str:
+        """Return the device class."""
+        return SensorDeviceClass.ENERGY
+
+    @property
     def state_class(self) -> str:
         """Return the state class."""
         return STATE_CLASS_TOTAL_INCREASING
+
+    @property
+    def native_unit_of_measurement(self) -> str:
+        """Return the native unit of measurement."""
+        return UnitOfEnergy.KILO_WATT_HOUR
 
     @property
     def native_value(self):
@@ -95,9 +99,19 @@ class PowerpalLiveConsumptionSensor(PowerpalSensor, SensorEntity):
         return f"powerpal-live-{self.config_entry.entry_id}"
 
     @property
+    def device_class(self) -> str:
+        """Return the device class."""
+        return SensorDeviceClass.POWER
+
+    @property
     def state_class(self) -> str:
         """Return the state class."""
         return STATE_CLASS_MEASUREMENT
+
+    @property
+    def native_unit_of_measurement(self) -> str:
+        """Return the native unit of measurement."""
+        return UnitOfPower.KILO_WATT
 
     @property
     def native_value(self):
