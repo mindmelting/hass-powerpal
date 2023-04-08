@@ -77,19 +77,14 @@ class PowerpalTotalConsumptionSensor(PowerpalSensor, SensorEntity):
         return STATE_CLASS_TOTAL_INCREASING
 
     @property
-    def suggested_unit_of_measurement(self) -> str:
-        """Return the suggestted unit of measurement."""
-        return UnitOfEnergy.KILO_WATT_HOUR
-
-    @property
     def native_unit_of_measurement(self) -> str:
         """Return the native unit of measurement."""
-        return UnitOfEnergy.WATT_HOUR
+        return UnitOfEnergy.KILO_WATT_HOUR
 
     @property
     def native_value(self):
         """Return the native value of the sensor."""
-        return self.coordinator.data.get("total_watt_hours")
+        return self.coordinator.data.get("total_watt_hours") / 1000
 
 
 class PowerpalLiveConsumptionSensor(PowerpalSensor, SensorEntity):
@@ -114,16 +109,11 @@ class PowerpalLiveConsumptionSensor(PowerpalSensor, SensorEntity):
         return STATE_CLASS_MEASUREMENT
 
     @property
-    def suggested_unit_of_measurement(self) -> str:
-        """Return the suggestted unit of measurement."""
-        return UnitOfPower.KILO_WATT
-
-    @property
     def native_unit_of_measurement(self) -> str:
         """Return the native unit of measurement."""
-        return UnitOfPower.WATT
+        return UnitOfPower.KILO_WATT
 
     @property
     def native_value(self):
         """Return the native value of the sensor."""
-        return self.coordinator.data.get("last_reading_watt_hours") * 60
+        return (self.coordinator.data.get("last_reading_watt_hours") * 60) / 1000
