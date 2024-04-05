@@ -2,8 +2,7 @@
 from homeassistant.components.sensor import (
     SensorEntity,
     SensorDeviceClass,
-    STATE_CLASS_TOTAL_INCREASING,
-    STATE_CLASS_MEASUREMENT,
+    SensorStateClass,
 )
 from homeassistant.const import (
     UnitOfPower,
@@ -74,7 +73,7 @@ class PowerpalTotalConsumptionSensor(PowerpalSensor, SensorEntity):
     @property
     def state_class(self) -> str:
         """Return the state class."""
-        return STATE_CLASS_TOTAL_INCREASING
+        return SensorStateClass.TOTAL_INCREASING
 
     @property
     def native_unit_of_measurement(self) -> str:
@@ -106,7 +105,7 @@ class PowerpalLiveConsumptionSensor(PowerpalSensor, SensorEntity):
     @property
     def state_class(self) -> str:
         """Return the state class."""
-        return STATE_CLASS_MEASUREMENT
+        return SensorStateClass.MEASUREMENT
 
     @property
     def native_unit_of_measurement(self) -> str:
